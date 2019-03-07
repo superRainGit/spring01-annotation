@@ -12,6 +12,8 @@ import com.zhangchaoyu.bean.Student;
 import com.zhangchaoyu.bean.Teacher;
 import com.zhangchaoyu.condition.LinuxCondition;
 import com.zhangchaoyu.condition.WindowsCondition;
+import com.zhangchaoyu.definition.SelfBeanDefinitionRegister;
+import com.zhangchaoyu.factory.SelfFactoryBean;
 import com.zhangchaoyu.selector.SelfImportSelector;
 
 /**
@@ -20,7 +22,7 @@ import com.zhangchaoyu.selector.SelfImportSelector;
  */
 @Conditional(WindowsCondition.class)
 @Configuration
-@Import({Teacher.class, Student.class, SelfImportSelector.class})
+@Import({Teacher.class, Student.class, SelfImportSelector.class, SelfBeanDefinitionRegister.class})
 public class MyConfiguration2 {
 
 	/**
@@ -64,5 +66,13 @@ public class MyConfiguration2 {
 	 * 3 使用@Import 注解进行bean的注入
 	 * 		一、直接使用@Import(类型名) 通过直接配置类型名的方式来向ioc容器中注册bean
 	 * 		二、通过实现 ImportSelector接口来控制注入哪些bean
+	 * 		三、通过实现ImportBeanDefinitionRegistrar接口通过beanDefinitionRegistry来注册bean
+	 * 4 使用FactoryBean向ioc容器中注入bean
+	 * 		一、使用该方法默认注入的bean的类型是FactoryBean的getObject()的对象的类型
+	 * 		二、如果向要获取FactoryBean对象本身 那么通过在Id前面加上&+id的方式获取
 	 */
+	@Bean
+	public SelfFactoryBean factoryBean() {
+		return new SelfFactoryBean();
+	}
 }

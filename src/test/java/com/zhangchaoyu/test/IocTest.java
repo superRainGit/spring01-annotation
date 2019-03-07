@@ -15,6 +15,10 @@ public class IocTest {
 	public void testImport() {
 		ApplicationContext context = new AnnotationConfigApplicationContext(MyConfiguration2.class);
 		this.printBeanDefination(context);
+		Object bean = context.getBean("factoryBean");
+		System.out.println(bean.getClass());
+		Object bean2 = context.getBean("&factoryBean");
+		System.out.println(bean2.getClass());
 	}
 
 	@Test
