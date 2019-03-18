@@ -32,6 +32,9 @@ import com.zhangchaoyu.dao.BookDao;
  *  	1. 标注在方法位置:放在setter方法上或者使用@Bean+方法参数的方式[不使用@Autowired的效果是一样的]
  *  	2. 标注在构造器上:如果组件只有一个有参构造器 这个有参构造器的@Autowired可以不写
  *  	3. 放在参数的位置上:即使用如下方式完成注入(@Autowired Car car)
+ *  3. 自定义组件想要使用Spring容器底层的一些组件(ApplicationContext、BeanFactory、xxx)
+ *  	只需要自定义组件实现xxxAware接口；在创建对象的时候，会调用接口规定的方法注入相关组件
+ *  	xxxAware的功能是使用xxxAwareProcessor后置处理器进行处理的
  */
 @Configuration
 @ComponentScan({"com.zhangchaoyu.controller", "com.zhangchaoyu.service", 
